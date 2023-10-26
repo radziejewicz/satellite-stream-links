@@ -19,10 +19,9 @@ jobs:
 
     - name: Validate JSON
       run: |
-        if jq empty < $GITHUB_WORKSPACE/src/links.json; then
+        if jq empty < src/links.json; then
           echo "JSON is valid."
         else
           echo "JSON is invalid."
           exit 1
         fi
-      working-directory: $GITHUB_WORKSPACE
