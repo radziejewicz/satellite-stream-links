@@ -1,9 +1,11 @@
 {
-    "version": "1.0",
+    "version": "1.1",
     "links": {
-            "25544": [
-            "https://www.youtube.com/watch?v=1rcSyN74BY0",
-            "https://www.youtube.com/watch?v=K5JSRGhB-nM"
-        ]
+        "25544": {
+            "youtube": [
+                "https://www.youtube.com/watch?v=1rcSyN74BY0",
+                "https://www.youtube.com/watch?v=K5JSRGhB-nM"
+            ]
+        }
     }
 }
