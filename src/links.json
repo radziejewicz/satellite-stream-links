@@ -1,6 +1,9 @@
 {
-    "25544": [
-        "https://www.youtube.com/watch?v=1rcSyN74BY0",
-        "https://www.youtube.com/watch?v=K5JSRGhB-nM"
-    ]
+    "version": "1.0",
+    "links": {
+            "25544": [
+            "https://www.youtube.com/watch?v=1rcSyN74BY0",
+            "https://www.youtube.com/watch?v=K5JSRGhB-nM"
+        ]
+    }
 }
