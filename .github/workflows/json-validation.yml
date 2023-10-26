@@ -1,0 +1,24 @@
+name: JSON Validation
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  validate-json:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Check out code
+      uses: actions/checkout@v2
+
+    - name: Validate JSON
+      run: |
+        if jq empty < ./src/links.json; then
+          echo "JSON is valid."
+        else
+          echo "JSON is invalid."
+          exit 1
+        fi
+      working-directory: $GITHUB_WORKSPACE
