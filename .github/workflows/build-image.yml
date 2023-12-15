@@ -1,20 +1,11 @@
 name: Build docker image
 permissions: write-all
-# on:
-#   workflow_dispatch:
-#     inputs:
-#       name:
-#         description: 'Build docker image'
-
 on:
-  push:
-    branches:
-      - main
-  pull_request:
-    branches:    
-      - main
-      - 'releases/**'      
-    
+  workflow_dispatch:
+    inputs:
+      name:
+        description: 'Build docker image'
+
 jobs:
   build-and-push:
     runs-on: ubuntu-latest
