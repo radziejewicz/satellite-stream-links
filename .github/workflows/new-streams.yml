@@ -1,0 +1,40 @@
+name: Detect new streams
+
+# on:
+#   schedule:
+#     - cron: '0 10 * * *'
+#   pull_request:
+#       branches:    
+#         - dev
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:    
+      - main
+      - 'releases/**'    
+
+jobs:
+  commit_changes:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2    
+
+    - name: Run Docker container
+      working-directory: ./src 
+      run: |
+        docker run --rm -v $(pwd):/app -w /app -e YOUTUBE_API_KEY=${{ secrets.YOUTUBE_API_KEY }} ghcr.io/${{ github.repository_owner }}/${{ github.event.repository.name }}:latest python update.py
+
+    - name: Commit changes
+      run: |
+        git config --global user.email "github@example.com"
+        git config --global user.name "GitHub Action"
+        git add .
+        git commit -m "Update stream urls" || true
+        git push
+
+      # Todo: slack message
