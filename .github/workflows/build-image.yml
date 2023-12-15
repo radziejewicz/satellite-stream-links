@@ -34,5 +34,5 @@ jobs:
 
       - name: Build and push Docker image
         run: |
-          docker buildx build --platform linux/amd64,linux/arm64 -t ghcr.io/${{ github.repository_owner }}/satellite-stream-links:latest .
+          docker buildx build --platform linux/amd64,linux/arm64 -t ghcr.io/${{ github.repository_owner }}/satellite-stream-links:latest ./src/Dockerfile
           docker push ghcr.io/${{ github.repository_owner }}/satellite-stream-links:latest    
