@@ -33,6 +33,7 @@ jobs:
         run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
 
       - name: Build and push Docker image
+        working-directory: ./src 
         run: |
-          docker buildx build --platform linux/amd64,linux/arm64 -t ghcr.io/${{ github.repository_owner }}/satellite-stream-links:latest ./src/Dockerfile
+          docker buildx build --platform linux/amd64,linux/arm64 -t ghcr.io/${{ github.repository_owner }}/satellite-stream-links:latest .
           docker push ghcr.io/${{ github.repository_owner }}/satellite-stream-links:latest    
