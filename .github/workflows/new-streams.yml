@@ -1,0 +1,35 @@
+name: Check for new streams
+
+on:
+  schedule:
+    - cron: '0 10 * * *'
+
+jobs:
+  commit_changes:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Build and push Docker image
+      uses: docker/build-push-action@f2a1d5e99d037542a71f64918e516c093c6f3fc4
+      with:
+        context: .
+        file: src/Dockerfile
+        push: true
+        outputs: type=image,name=satellite-stream-links
+
+    - name: Run Docker container
+      run: |
+        docker run --rm -v $(pwd):/app -w /app -e YOUTUBE_API_KEY=TeSt satellite-stream-links python update.py
+
+    - name: Commit changes
+      run: |
+        git config --global user.email "github@example.com"
+        git config --global user.name "GitHub Action"
+        git add .
+        git commit -m "Update stream urls" || true
+        git push
+
+      # Todo: slack message
