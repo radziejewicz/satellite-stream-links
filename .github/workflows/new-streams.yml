@@ -27,7 +27,7 @@ jobs:
     - name: Run Docker container
       working-directory: ./src 
       run: |
-        docker run --rm -v $(pwd):/app -w /app -e YOUTUBE_API_KEY=TeSt ghcr.io/${{ github.repository_owner }}/${{ github.event.repository.name }}:latest python update.py
+        docker run --rm -v $(pwd):/app -w /app -e YOUTUBE_API_KEY=${{ secrets.YOUTUBE_API_KEY }} ghcr.io/${{ github.repository_owner }}/${{ github.event.repository.name }}:latest python update.py
 
     - name: Commit changes
       run: |
