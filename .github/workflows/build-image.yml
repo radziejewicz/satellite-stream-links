@@ -1,10 +1,19 @@
 name: Build docker image
 
+# on:
+#   workflow_dispatch:
+#     inputs:
+#       name:
+#         description: 'Build docker image'
+
 on:
-  workflow_dispatch:
-    inputs:
-      name:
-        description: 'Build docker image'
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:    
+      - main
+      - 'releases/**'      
     
 jobs:
   build-and-push:
