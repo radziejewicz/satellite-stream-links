@@ -19,7 +19,7 @@ jobs:
 
     - name: Validate JSON
       run: |
-        if jq empty < src/links.json; then
+        if jq empty < src/live_streams.json; then
           echo "JSON is valid."
         else
           echo "JSON is invalid."
