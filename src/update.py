@@ -6,7 +6,7 @@ from googleapiclient.discovery import build
 
 YOUTUBE_API_KEY = os.environ.get('YOUTUBE_API_KEY')
 NASA_CHANNEL_ID = 'UCLA_DiR1FfKNvjuUpBHmylQ'
-JSON_FILE_NAME = 'live_streams.json' # For tests
+JSON_FILE_NAME = 'live_streams.json'
 
 youtube = build('youtube', 'v3', developerKey=YOUTUBE_API_KEY)
 
@@ -19,7 +19,6 @@ def get_live_streams():
         channelId=NASA_CHANNEL_ID
     )
     response = request.execute()
-
     return response['items']
 
 
@@ -32,11 +31,11 @@ def update_json(file_name, new_urls):
             existing_urls = data['links']['25544']['youtube']
             urls_exist = True
 
-            for url in new_urls:
-                if url not in existing_urls:
-                    print(url)
-                    urls_exist = False
-                    break
+            if new_urls is not None:
+                for url in new_urls:
+                    if url not in existing_urls:
+                        urls_exist = False
+                        break
 
             if not urls_exist:
                 data['links']['25544']['youtube'] = new_urls
