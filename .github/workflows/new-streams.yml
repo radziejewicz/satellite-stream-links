@@ -2,7 +2,7 @@ name: Detect new streams
 
 on:
   schedule:
-    - cron: '0 10 * * *'
+    - cron: '0 */1 * * *'
   pull_request:
       branches:    
         - main
@@ -20,7 +20,7 @@ jobs:
       run: |
         docker run --rm -v $(pwd):/app -w /app -e YOUTUBE_API_KEY=${{ secrets.YOUTUBE_API_KEY }} ghcr.io/${{ github.repository_owner }}/${{ github.event.repository.name }}:latest python update.py
 
-    - name: Commit changes
+    - name: Check stream links
       run: |
         git config --global user.email "github@example.com"
         git config --global user.name "GitHub Action"
