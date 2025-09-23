@@ -1,6 +1,7 @@
 name: Detect new streams
 
 on:
+  workflow_dispatch:
   schedule:
     - cron: '0 */1 * * *'
   pull_request:
