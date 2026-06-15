@@ -10,6 +10,7 @@ on:
 
 jobs:
   commit_changes:
+    if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
 
     steps:

@@ -1,0 +1,24 @@
+name: Tests
+
+on:
+  push:
+
+jobs:
+  pytest:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.9'
+
+      - name: Install dependencies
+        run: pip install pytest google-api-python-client requests
+
+      - name: Run tests
+        working-directory: ./src
+        run: python -m pytest -v
