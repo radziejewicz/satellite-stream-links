@@ -5,21 +5,25 @@ from googleapiclient.discovery import build
 
 
 YOUTUBE_API_KEY = os.environ.get('YOUTUBE_API_KEY')
-NASA_CHANNEL_ID = 'UCLA_DiR1FfKNvjuUpBHmylQ'
+NASA_CHANNEL_ID = ['UCLA_DiR1FfKNvjuUpBHmylQ', 'UCkvW_7kp9LJrztmgA4q4bJQ']
 JSON_FILE_NAME = 'live_streams.json'
 
 youtube = build('youtube', 'v3', developerKey=YOUTUBE_API_KEY)
 
 def get_live_streams():
-    request = youtube.search().list(
-        part='snippet',
-        eventType='live',
-        type='video',
-        maxResults=50,
-        channelId=NASA_CHANNEL_ID
-    )
-    response = request.execute()
-    return response['items']
+    items = []
+    for channel_id in NASA_CHANNEL_ID:
+        request = youtube.search().list(
+            part='snippet',
+            eventType='live',
+            type='video',
+            maxResults=50,
+            channelId=channel_id
+        )
+        response = request.execute()
+        items.extend(response['items'])
+
+    return items
 
 
 def update_json(file_name, new_urls):
@@ -54,7 +58,8 @@ def find_live_streams(json_data) -> list:
 
         target_titles = [
             "Live High-Definition Views from the International Space Station (Official NASA Stream)",
-            "Live Video from the International Space Station (Official NASA Stream)"
+            "Live Video from the International Space Station (Official NASA Stream)",
+            "Live 4K video of Earth and space: 24/7 Livestream of Earth by Sen’s 4K video cameras on the ISS"
         ]
 
         for item in json_data:
